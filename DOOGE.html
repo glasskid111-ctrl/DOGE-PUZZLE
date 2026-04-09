@@ -1,82 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Puzzle Gate</title>
-  <style>
-    body { font-family: Arial, sans-serif; background:#111; color:#eee; padding:20px; }
-    .panel { margin:20px 0; padding:15px; border:1px solid #444; border-radius:6px; }
-    .hidden { display:none; }
-    input { padding:6px 8px; margin-right:8px; }
-    button { padding:6px 10px; cursor:pointer; }
-    .success { color:#4caf50; margin-top:8px; }
-    .error { color:#f44336; margin-top:8px; }
-    code { background:#222; padding:3px 5px; border-radius:3px; }
-  </style>
+<meta charset="UTF-8">
+<title>Puzzle Gate</title>
+<style>
+    body {
+        margin: 0;
+        background: #050505;
+        font-family: 'Orbitron', sans-serif;
+        color: #bffcff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .panel {
+        background: rgba(0, 20, 30, 0.7);
+        border: 2px solid #00eaff;
+        border-radius: 10px;
+        padding: 30px;
+        width: 380px;
+        text-align: center;
+        box-shadow: 0 0 20px #00eaff;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 2px;
+        color: #7ffcff;
+    }
+
+    h2 {
+        margin-top: 5px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #9be7ff;
+    }
+
+    input {
+        margin-top: 20px;
+        width: 160px;
+        font-size: 22px;
+        text-align: center;
+        padding: 8px;
+        border: 2px solid #00eaff;
+        background: #000;
+        color: #7ffcff;
+        border-radius: 6px;
+        letter-spacing: 4px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #00eaff;
+        border: none;
+        border-radius: 6px;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 0 10px #00eaff;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .msg {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .success { color: #4cff8f; }
+    .error { color: #ff4c4c; }
+</style>
 </head>
 <body>
-  <h1>Multi‑Step Puzzle</h1>
 
-  <!-- Step 1: Password 1265 -->
-  <div class="panel" id="step1">
-    <h2>Step 1: Enter the first password</h2>
-    <p>Type the correct 4‑digit password to continue.</p>
-    <input type="password" id="pw1" maxlength="4" />
-    <button onclick="checkPw1()">Submit</button>
-    <div id="msg1"></div>
-  </div>
+<div class="panel" id="step1">
+    <h1>LEVEL 01</h1>
+    <h2>Gatekeeper’s Pass</h2>
+    <input id="pw1" maxlength="4" placeholder="____">
+    <br>
+    <button onclick="checkPw1()">DECRYPT ACCESS</button>
+    <div id="msg1" class="msg"></div>
+</div>
 
-  <!-- Step 2: Morse code puzzle (5602) -->
-  <div class="panel hidden" id="step2">
-    <h2>Step 2: Solve the Morse code</h2>
-    <p>Decode this Morse code into digits and enter the 4‑digit answer:</p>
-    <p>
-      <code>..... &nbsp; -.... &nbsp; ----- &nbsp; ..---</code>
+<div class="panel hidden" id="step2">
+    <h1>LEVEL 02</h1>
+    <h2>Morse Cipher</h2>
+    <p style="margin-top:15px; font-size:14px;">
+        Decode the sequence:<br><br>
+        <code>..... &nbsp; -.... &nbsp; ----- &nbsp; ..---</code>
     </p>
-    <small>(Hint: each group is one digit in Morse.)</small><br><br>
-    <input type="text" id="pw2" maxlength="4" />
-    <button onclick="checkPw2()">Submit</button>
-    <div id="msg2"></div>
-  </div>
+    <input id="pw2" maxlength="4" placeholder="____">
+    <br>
+    <button onclick="checkPw2()">DECRYPT ACCESS</button>
+    <div id="msg2" class="msg"></div>
+</div>
 
-  <!-- Step 3: Final instruction -->
-  <div class="panel hidden" id="step3">
-    <h2>Step 3: Final task</h2>
-    <p>
-      You’ve cleared all gates. The final instruction is:
-    </p>
-    <p>
-      <strong>Text the word "poop" to the phone number 419‑341‑3996.</strong>
-    </p>
-    <p>(This is just the puzzle’s final message—what you do with it is up to you.)</p>
-  </div>
+<!-- UPDATED FINAL LEVEL -->
+<div class="panel hidden" id="step3">
+    <h1>LEVEL 03</h1>
+    <h2>Final Directive</h2>
+    <p style="margin-top:20px; font-size:15px;">
+        The puzzle’s final message reads:<br><br>
 
-  <script>
-    function checkPw1() {
-      const input = document.getElementById('pw1').value.trim();
-      const msg = document.getElementById('msg1');
-      if (input === '1265') {
-        msg.textContent = 'Correct. Proceeding to the Morse code puzzle...';
-        msg.className = 'success';
-        document.getElementById('step2').classList.remove('hidden');
-      } else {
-        msg.textContent = 'Incorrect password. Try again.';
-        msg.className = 'error';
-      }
+        <strong>1️⃣ Text the word “poop” to 419‑341‑3996.</strong><br><br>
+
+        <strong>2️⃣ Email the word “poop” to:</strong><br>
+        <strong>buck.josh1234@gmail.com</strong><br><br>
+
+        (Displayed for puzzle purposes only.)
+    </p>
+</div>
+
+<script>
+function checkPw1() {
+    const v = document.getElementById("pw1").value.trim();
+    const msg = document.getElementById("msg1");
+    if (v === "1265") {
+        msg.textContent = "ACCESS GRANTED";
+        msg.className = "msg success";
+        document.getElementById("step1").classList.add("hidden");
+        document.getElementById("step2").classList.remove("hidden");
+    } else {
+        msg.textContent = "ACCESS DENIED";
+        msg.className = "msg error";
     }
+}
 
-    function checkPw2() {
-      const input = document.getElementById('pw2').value.trim();
-      const msg = document.getElementById('msg2');
-      if (input === '5602') {
-        msg.textContent = 'Correct. Revealing the final task...';
-        msg.className = 'success';
-        document.getElementById('step3').classList.remove('hidden');
-      } else {
-        msg.textContent = 'Incorrect answer. Check the Morse code again.';
-        msg.className = 'error';
-      }
+function checkPw2() {
+    const v = document.getElementById("pw2").value.trim();
+    const msg = document.getElementById("msg2");
+    if (v === "5602") {
+        msg.textContent = "CIPHER ACCEPTED";
+        msg.className = "msg success";
+        document.getElementById("step2").classList.add("hidden");
+        document.getElementById("step3").classList.remove("hidden");
+    } else {
+        msg.textContent = "INVALID CIPHER";
+        msg.className = "msg error";
     }
-  </script>
+}
+</script>
+
 </body>
 </html>
