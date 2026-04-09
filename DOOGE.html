@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Puzzle Gate</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#111; color:#eee; padding:20px; }
+    .panel { margin:20px 0; padding:15px; border:1px solid #444; border-radius:6px; }
+    .hidden { display:none; }
+    input { padding:6px 8px; margin-right:8px; }
+    button { padding:6px 10px; cursor:pointer; }
+    .success { color:#4caf50; margin-top:8px; }
+    .error { color:#f44336; margin-top:8px; }
+    code { background:#222; padding:3px 5px; border-radius:3px; }
+  </style>
+</head>
+<body>
+  <h1>Multi‑Step Puzzle</h1>
+
+  <!-- Step 1: Password 1265 -->
+  <div class="panel" id="step1">
+    <h2>Step 1: Enter the first password</h2>
+    <p>Type the correct 4‑digit password to continue.</p>
+    <input type="password" id="pw1" maxlength="4" />
+    <button onclick="checkPw1()">Submit</button>
+    <div id="msg1"></div>
+  </div>
+
+  <!-- Step 2: Morse code puzzle (5602) -->
+  <div class="panel hidden" id="step2">
+    <h2>Step 2: Solve the Morse code</h2>
+    <p>Decode this Morse code into digits and enter the 4‑digit answer:</p>
+    <p>
+      <code>..... &nbsp; -.... &nbsp; ----- &nbsp; ..---</code>
+    </p>
+    <small>(Hint: each group is one digit in Morse.)</small><br><br>
+    <input type="text" id="pw2" maxlength="4" />
+    <button onclick="checkPw2()">Submit</button>
+    <div id="msg2"></div>
+  </div>
+
+  <!-- Step 3: Final instruction -->
+  <div class="panel hidden" id="step3">
+    <h2>Step 3: Final task</h2>
+    <p>
+      You’ve cleared all gates. The final instruction is:
+    </p>
+    <p>
+      <strong>Text the word "poop" to the phone number 419‑341‑3996.</strong>
+    </p>
+    <p>(This is just the puzzle’s final message—what you do with it is up to you.)</p>
+  </div>
+
+  <script>
+    function checkPw1() {
+      const input = document.getElementById('pw1').value.trim();
+      const msg = document.getElementById('msg1');
+      if (input === '1265') {
+        msg.textContent = 'Correct. Proceeding to the Morse code puzzle...';
+        msg.className = 'success';
+        document.getElementById('step2').classList.remove('hidden');
+      } else {
+        msg.textContent = 'Incorrect password. Try again.';
+        msg.className = 'error';
+      }
+    }
+
+    function checkPw2() {
+      const input = document.getElementById('pw2').value.trim();
+      const msg = document.getElementById('msg2');
+      if (input === '5602') {
+        msg.textContent = 'Correct. Revealing the final task...';
+        msg.className = 'success';
+        document.getElementById('step3').classList.remove('hidden');
+      } else {
+        msg.textContent = 'Incorrect answer. Check the Morse code again.';
+        msg.className = 'error';
+      }
+    }
+  </script>
+</body>
+</html>
